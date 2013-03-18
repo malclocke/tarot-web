@@ -1,0 +1,8 @@
+ARGV.each do |f|
+  begin
+    puts "Importing #{f}"
+    Reference.create!(:filename => f)
+  rescue StandardError => e
+    warn "ERROR: #{e.to_s}"
+  end
+end
