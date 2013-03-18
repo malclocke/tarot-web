@@ -1,3 +1,8 @@
+<style>
+  #candidate {
+    display: none;
+  }
+</style>
 <div class="row">
   <div class="small-4 columns">
     <h1>NGC1365</h1>
@@ -15,7 +20,8 @@
   </div>
   <div class="small-4 columns">
     <p id="controls">
-      <img id="blink" src="a.png">
+      <div id="reference"></div>
+      <div id="candidate"></div>
     </p>
     <a class="button">Next</a>
     <a class="button">Annotate</a>
@@ -33,15 +39,30 @@
   </div>
 </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
+
   window.onload = function() {
+    
+    //// Define the path and options
+    //var path = '/NGC1365.reference.fit';
+    //var opts = {el: 'reference'};
+    //
+    //// Initialize the FITS file, passing the function getImage as a callback
+    //var f = new astro.FITS.File(path, getImage, opts);
+
     var blink = new Blink();
-    blink.setBlinkObject({ref: 'a.png', target: 'b.png'});
+    //blink.setBlinkObject({ref: 'a.png', target: 'b.png'});
+    blink.setReference('/NGC1365.reference.fit');
+    blink.setCandidate('/NGC1365.fit');
 
     var gui = new dat.GUI({autoPlace: false, width: 303});
     gui.close();
     var controls = document.getElementById('controls');
     controls.appendChild(gui.domElement);
-    gui.add(blink, 'blink_speed', 200, 2000).onChange(blink.setBlinkInterval);
+    gui.add(blink, 'blink_speed', 200, 2000);//.onChange(blink.setBlinkInterval);
+    gui.add(
+      blink, 'stretch', ['linear', 'logarithm', 'sqrt', 'arcsinh', 'power']
+    ).onChange(blink.onStretchChange);
   }
-</script>
+
+  </script>
