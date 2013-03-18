@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
+//= require dat.gui
+//= require fits
+//= require webfits-gl
 //= require_tree .
+
+$(document).foundation();
