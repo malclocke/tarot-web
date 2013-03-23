@@ -7,4 +7,8 @@ class Reference < ActiveRecord::Base
     self.galaxy = Galaxy.find_or_create_by_name(File.basename(filename, '.fit'))
     self.fits = File.open(filename)
   end
+
+  def as_json(options = {})
+    super(:methods => [:fits])
+  end
 end

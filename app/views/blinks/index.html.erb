@@ -51,9 +51,10 @@
     //var f = new astro.FITS.File(path, getImage, opts);
 
     var blink = new Blink();
-    //blink.setBlinkObject({ref: 'a.png', target: 'b.png'});
-    blink.setReference('/NGC1365.reference.fit');
-    blink.setCandidate('/NGC1365.fit');
+    var reference   = <%= @reference.to_json.html_safe %>;
+    var nightImage  = <%= @night_image.to_json.html_safe %>;
+    blink.setReference(reference.fits);
+    blink.setCandidate(nightImage.fits);
 
     var gui = new dat.GUI({autoPlace: false, width: 308});
     gui.close();

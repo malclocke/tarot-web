@@ -11,13 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221092435) do
+ActiveRecord::Schema.define(:version => 20130318090404) do
 
   create_table "galaxies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "night_images", :force => true do |t|
+    t.integer  "galaxy_id"
+    t.date     "night"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "fits_file_name"
+    t.string   "fits_content_type"
+    t.integer  "fits_file_size"
+    t.datetime "fits_updated_at"
+  end
+
+  add_index "night_images", ["galaxy_id"], :name => "index_night_images_on_galaxy_id"
 
   create_table "references", :force => true do |t|
     t.integer  "galaxy_id"
