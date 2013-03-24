@@ -13,9 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require underscore
+//= require backbone
 //= require dat.gui
 //= require fits
 //= require webfits-gl
+//= require tarot
 //= require_tree .
 
 $(document).foundation();

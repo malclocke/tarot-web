@@ -3,6 +3,6 @@ class NightImagesController < ApplicationController
 
   def next
     @night_image = NightImage.next
-    respond_with @night_image
+    respond_with @night_image, :location => night_image_url(@night_image)
   end
 end

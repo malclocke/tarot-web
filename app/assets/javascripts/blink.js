@@ -9,19 +9,10 @@ var Blink = function(opts) {
   this.blink_speed = 1000;
   this.stretch = 'asinh';
 
-  this.referenceElement = opts.referenceElement || 'reference';
-  this.candidateElement = opts.candidateElement || 'candidate';
+  this.referenceElement = opts.referenceElement;
+  this.candidateElement = opts.candidateElement;
 
   this.blink = function() {
-
-    //if (that.currentlyShowing == that.blinkObject.ref) {
-    //  that.currentlyShowing = that.blinkObject.target;
-    //} else {
-    //  that.currentlyShowing = that.blinkObject.ref;
-    //}
-
-    //var img = document.getElementById('blink');
-    //img.src = that.currentlyShowing;
 
     var referenceElement = that.getReferenceElement();
     var candidateElement = that.getCandidateElement();
@@ -36,11 +27,11 @@ var Blink = function(opts) {
   };
 
   this.getReferenceElement = function() {
-    return document.getElementById(that.referenceElement);
+    return that.referenceElement;
   };
 
   this.getCandidateElement = function() {
-    return document.getElementById(that.candidateElement);
+    return that.candidateElement;
   };
 
   this.setBlinkInterval = function() {
@@ -88,7 +79,7 @@ var Blink = function(opts) {
     var extent = dataunit.getExtent(arr);
     
     // Get the DOM element
-    var el = document.querySelector('#' + opts.el);
+    var el = opts.el;
     
     // Initialize the WebFITS context with a viewer of size width
     var webfits = new astro.WebFITS(el, factor * width);

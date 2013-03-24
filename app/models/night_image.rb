@@ -6,6 +6,7 @@ class NightImage < ActiveRecord::Base
   validates :night, :presence => true
 
   delegate :reference, :to => :galaxy
+  delegate :fits, :to => :reference, :prefix => true
 
   # FIXME Make a real implementation
   # Will eventually need to pick a viable candidate to display to the current
@@ -20,6 +21,6 @@ class NightImage < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(:methods => [:fits])
+    super(:methods => [:fits, :reference_fits])
   end
 end

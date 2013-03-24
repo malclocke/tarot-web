@@ -19,11 +19,8 @@
     </dl>
   </div>
   <div class="small-4 columns">
-    <p id="controls">
-      <div id="reference"></div>
-      <div id="candidate"></div>
-    </p>
-    <a class="button">Next</a>
+    <p id="controls"></p>
+    <a id="next-button" class="button">Next</a>
     <a class="button">Annotate</a>
     <a class="button">Tile</a>
   </div>
@@ -43,27 +40,15 @@
 
   window.onload = function() {
     
-    //// Define the path and options
-    //var path = '/NGC1365.reference.fit';
-    //var opts = {el: 'reference'};
-    //
-    //// Initialize the FITS file, passing the function getImage as a callback
-    //var f = new astro.FITS.File(path, getImage, opts);
+    Tarot.Config = {
+      nextNightImageUrl: '<%= next_night_images_url.html_safe %>'
+    };
 
-    var blink = new Blink();
-    var reference   = <%= @reference.to_json.html_safe %>;
-    var nightImage  = <%= @night_image.to_json.html_safe %>;
-    blink.setReference(reference.fits);
-    blink.setCandidate(nightImage.fits);
+    Tarot.loadNextNightImage();
 
-    var gui = new dat.GUI({autoPlace: false, width: 308});
-    gui.close();
-    var controls = document.getElementById('controls');
-    controls.appendChild(gui.domElement);
-    gui.add(blink, 'blink_speed', 200, 2000);//.onChange(blink.setBlinkInterval);
-    gui.add(
-      blink, 'stretch', ['linear', 'logarithm', 'sqrt', 'arcsinh', 'power']
-    ).onChange(blink.onStretchChange);
+    $('#next-button').click(function() {
+      Tarot.loadNextNightImage();
+    });
   }
 
   </script>
