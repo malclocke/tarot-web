@@ -6,13 +6,14 @@ class NightImage < ActiveRecord::Base
   validates :night, :presence => true
 
   delegate :reference, :to => :galaxy
+  delegate :name, :to => :galaxy, :prefix => true
   delegate :fits, :to => :reference, :prefix => true
 
   # FIXME Make a real implementation
   # Will eventually need to pick a viable candidate to display to the current
   # user.  For now, juts pick a random image.
   def self.next
-    all.sample
+    includes(:galaxy).where('galaxies.name LIKE "NGC%"').sample
   end
 
   def filename=(filename)
@@ -20,7 +21,24 @@ class NightImage < ActiveRecord::Base
     self.fits = File.open(filename)
   end
 
+  def archive_name
+    "TODO"
+  end
+
+  def timestamp
+    "TODO"
+  end
+
+  def reference_timestamp
+    "TODO"
+  end
+
   def as_json(options = {})
-    super(:methods => [:fits, :reference_fits])
+    super(
+      :methods => [
+        :fits, :reference_fits, :galaxy_name, :archive_name, :timestamp,
+        :reference_timestamp
+      ]
+    )
   end
 end

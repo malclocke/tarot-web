@@ -14,6 +14,9 @@ Tarot.loadNextNightImage = function(blink) {
         el: $('#controls'),
         model: model
       }).render();
+      var nightImageInfoView = new Tarot.Views.NightImageInfoView({
+        el: $('#left-column'), model: model
+      }).render();
     }
   });
 }
