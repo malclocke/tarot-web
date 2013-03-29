@@ -1,6 +1,7 @@
 Tarot.Views.BlinkView = Backbone.View.extend({
 
   render: function() {
+    this.$el.empty();
     var referenceElement = $('<div></div>');
     var candidateElement = $('<div style="display: none;"></div>');
     var blink = new Blink({
@@ -17,8 +18,8 @@ Tarot.Views.BlinkView = Backbone.View.extend({
     gui.add(
       blink, 'stretch', ['linear', 'logarithm', 'sqrt', 'arcsinh', 'power']
     ).onChange(blink.onStretchChange);
-    this.$el.empty();
     this.$el.append(referenceElement);
     this.$el.append(candidateElement);
+    return this;
   }
 });
